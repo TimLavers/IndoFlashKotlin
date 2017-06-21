@@ -1,0 +1,32 @@
+<resources>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">IndoFlash</string>
+    <string name="ok">OK</string>
+    <string name="next">Next</string>
+    <string name="show">Show</string>
+    <string name="repeat">Repeat list</string>
+    <string name="add_to_favourites">Favourite</string>
+    <string name="remove_from_favourites">Remove from Favourites</string>
+    <string name="favourites_is_empty">The Favourites list is empty. Words can be added from other lists.</string>
+    <string name="indonesian_first">Indonesian to English mode</string>
+    <string name="english_first">English to Indonesian mode</string>
+    <string name="shuffle">Turn shuffle on</string>
+    <string name="shuffle_on_toast">Shuffle is on</string>
+    <string name="shuffle_off_toast">Shuffle is off</string>
+    <string name="added_to_favourites_toast">Added to favourites</string>
+    <string name="removed_from_favourites_toast">Removed from favourites</string>
+    <string name="unshuffle">Turn shuffle off</string>
+    <string name="show_word_lists">Lists</string>
+    <string name="show_chapter_lists">Chapters</string>
+    <string name="info">About IndoFlash</string>
+    <string name="acknowledgements">Word lists copied with permission from \"The Indonesian Way\" by George Quinn, modules 1–6.
+        Copyright George Quinn (except for any mistakes in transcription).
+        Software by Tim Lavers, Copyright 2014. Icons by Isobel Lavers, Copyright 2014.
+        License: free for any non-commercial use, no warranties of any kind - use at your own risk.</string>
+    <string name="help">How to use IndoFlash</string>
+    <string name="help_text">Press the "Show" button to see the translation of the current word.
+    Press the "Next" button to see the next word.
+    Press the up or down arrow button to switch between English to Indonesian mode and Indonesian to English mode.
+    Press the lists button to choose another list, including the Favourites list.
+    Press the favourites button to add words to the favourites list.</string>
+</resources>
