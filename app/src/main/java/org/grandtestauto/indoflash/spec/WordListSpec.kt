@@ -1,8 +1,4 @@
-package org.grandtestauto.indoflash
-
-import org.w3c.dom.Element
-import org.w3c.dom.Node
-import org.w3c.dom.NodeList
+package org.grandtestauto.indoflash.spec
 
 val TAG = "WordList"
 /**
@@ -19,7 +15,7 @@ class WordListSpec : Spec {
         this.fileName = fileName
     }
 
-    internal constructor(node: Element) : super(node) {
+    internal constructor(node: org.w3c.dom.Element) : super(node) {
         val childNodes = node.getElementsByTagName(FILE_TAG)
         val child = childNodes.item(0)
         fileName = child.textContent.trim { it <= ' ' }

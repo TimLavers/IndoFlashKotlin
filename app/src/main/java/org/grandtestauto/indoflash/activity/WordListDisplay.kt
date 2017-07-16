@@ -1,4 +1,4 @@
-package org.grandtestauto.indoflash
+package org.grandtestauto.indoflash.activity
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -10,6 +10,10 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import org.grandtestauto.indoflash.IndoFlash
+import org.grandtestauto.indoflash.R
+import org.grandtestauto.indoflash.word.Word
+import org.grandtestauto.indoflash.word.WordList
 import java.util.*
 
 class WordListDisplay : Activity() {
@@ -17,11 +21,11 @@ class WordListDisplay : Activity() {
     lateinit private var application: IndoFlash
     lateinit private var chapterTitle: TextView
     lateinit private var wordView: TextView
-    private var definitionView: TextView? = null
-    private var nextButton: Button? = null
-    private var indonesianFirstButton: ImageButton? = null
-    private var addRemoveFavouriteButton: ImageButton? = null
-    private var shuffleButton: ImageButton? = null
+    lateinit private var definitionView: TextView
+    lateinit private var nextButton: Button
+    lateinit private var indonesianFirstButton: ImageButton
+    lateinit  private var addRemoveFavouriteButton: ImageButton
+    lateinit private var shuffleButton: ImageButton
     private var showDefinition: Boolean = false
     private var finished = false
     private var currentPosition = 0
@@ -34,12 +38,12 @@ class WordListDisplay : Activity() {
         wordView = findViewById(R.id.word_view) as TextView
         definitionView = findViewById(R.id.definition_view) as TextView
         indonesianFirstButton = findViewById(R.id.indonesian_first_button) as ImageButton
-        indonesianFirstButton!!.setOnClickListener { toggleIndonesianFirst() }
+        indonesianFirstButton.setOnClickListener { toggleIndonesianFirst() }
         nextButton = findViewById(R.id.next_button) as Button
-        nextButton!!.setText(R.string.show)
-        nextButton!!.setOnClickListener { next() }
+        nextButton.setText(R.string.show)
+        nextButton.setOnClickListener { next() }
         shuffleButton = findViewById(R.id.shuffle_button) as ImageButton
-        shuffleButton!!.setOnClickListener { toggleShuffle() }
+        shuffleButton.setOnClickListener { toggleShuffle() }
 
         val showListsButton = findViewById(R.id.show_word_lists_button) as ImageButton
         showListsButton.setImageResource(R.drawable.ic_lists)
@@ -49,7 +53,7 @@ class WordListDisplay : Activity() {
         }
 
         addRemoveFavouriteButton = findViewById(R.id.add_to_favourites_button) as ImageButton
-        addRemoveFavouriteButton!!.setOnClickListener { addRemoveFavourite() }
+        addRemoveFavouriteButton.setOnClickListener { addRemoveFavourite() }
         application = getApplication() as IndoFlash
         doSetup()
     }
@@ -130,13 +134,13 @@ class WordListDisplay : Activity() {
     private fun setupIndonesianFirstButton(showToast: Boolean) {
         var resourceId = R.string.indonesian_first
         if (application.showIndonesianFirst()) {
-            indonesianFirstButton!!.setImageResource(R.drawable.ic_down_arrow)
+            indonesianFirstButton.setImageResource(R.drawable.ic_down_arrow)
         } else {
             resourceId = R.string.english_first
-            indonesianFirstButton!!.setImageResource(R.drawable.ic_up_arrow)
+            indonesianFirstButton.setImageResource(R.drawable.ic_up_arrow)
         }
-        val description = indonesianFirstButton!!.context.resources.getText(resourceId)
-        indonesianFirstButton!!.contentDescription = description
+        val description = indonesianFirstButton.context.resources.getText(resourceId)
+        indonesianFirstButton.contentDescription = description
         if (showToast)
             Toast.makeText(applicationContext, description, Toast.LENGTH_SHORT).show()
     }
@@ -153,13 +157,13 @@ class WordListDisplay : Activity() {
     private fun setupShuffleButton() {
         var resourceId = R.string.unshuffle
         if (application.shuffle()) {
-            shuffleButton!!.setImageResource(R.drawable.ic_shuffle)
+            shuffleButton.setImageResource(R.drawable.ic_shuffle)
         } else {
-            shuffleButton!!.setImageResource(R.drawable.ic_unshuffle)
+            shuffleButton.setImageResource(R.drawable.ic_unshuffle)
             resourceId = R.string.shuffle
         }
-        val description = shuffleButton!!.context.resources.getText(resourceId)
-        shuffleButton!!.contentDescription = description
+        val description = shuffleButton.context.resources.getText(resourceId)
+        shuffleButton.contentDescription = description
     }
 
     private fun doSetup() {
@@ -176,32 +180,32 @@ class WordListDisplay : Activity() {
             showForEmptyFavourites()
         } else {
             wordView.text = getWord(0).word
-            definitionView!!.text = ""
+            definitionView.text = ""
             showDefinition = true
             currentPosition = 0
-            nextButton!!.isClickable = true
-            addRemoveFavouriteButton!!.isClickable = true
+            nextButton.isClickable = true
+            addRemoveFavouriteButton.isClickable = true
         }
     }
 
     private fun showForEmptyFavourites() {
         finished = true
         wordView.setText(R.string.favourites_is_empty)
-        nextButton!!.text = ""
-        nextButton!!.isClickable = false
-        addRemoveFavouriteButton!!.isClickable = false
+        nextButton.text = ""
+        nextButton.isClickable = false
+        addRemoveFavouriteButton.isClickable = false
     }
 
     private fun setupFavouritesButton() {
         var resourceId = R.string.add_to_favourites
         if (application.showingFavourites()) {
             resourceId = R.string.remove_from_favourites
-            addRemoveFavouriteButton!!.setImageResource(R.drawable.ic_remove_from_favourites)
+            addRemoveFavouriteButton.setImageResource(R.drawable.ic_remove_from_favourites)
         } else {
-            addRemoveFavouriteButton!!.setImageResource(R.drawable.ic_add_to_favourites)
+            addRemoveFavouriteButton.setImageResource(R.drawable.ic_add_to_favourites)
         }
-        val description = addRemoveFavouriteButton!!.context.resources.getText(resourceId)
-        addRemoveFavouriteButton!!.contentDescription = description
+        val description = addRemoveFavouriteButton.context.resources.getText(resourceId)
+        addRemoveFavouriteButton.contentDescription = description
     }
 
     private fun addRemoveFavourite() {
@@ -218,7 +222,7 @@ class WordListDisplay : Activity() {
                 if (application.storedFavourites().words().isEmpty()) {
                     showForEmptyFavourites()
                 } else {
-                    nextButton!!.setText(R.string.repeat)
+                    nextButton.setText(R.string.repeat)
                 }
             } else {
                 next()
@@ -238,25 +242,25 @@ class WordListDisplay : Activity() {
         if (finished) {
             currentPosition = 0
             wordView.text = getWord(currentPosition).word
-            definitionView!!.text = ""
-            nextButton!!.setText(R.string.show)
+            definitionView.text = ""
+            nextButton.setText(R.string.show)
             showDefinition = true
             finished = false
             return
         }
         if (showDefinition) {
-            definitionView!!.text = getWord(currentPosition).definition
-            nextButton!!.setText(R.string.next)
+            definitionView.text = getWord(currentPosition).definition
+            nextButton.setText(R.string.next)
             showDefinition = false
             if (currentPosition == wordList!!.words().size - 1) {
                 finished = true
-                nextButton!!.setText(R.string.repeat)
+                nextButton.setText(R.string.repeat)
             }
         } else {
             currentPosition++
             wordView.text = getWord(currentPosition).word
-            definitionView!!.text = ""
-            nextButton!!.setText(R.string.show)
+            definitionView.text = ""
+            nextButton.setText(R.string.show)
             showDefinition = true
         }
     }

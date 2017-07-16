@@ -1,8 +1,7 @@
-package org.grandtestauto.indoflash
+package org.grandtestauto.indoflash.spec
 
+import org.grandtestauto.indoflash.FAVOURITES_FILE_NAME
 import org.w3c.dom.Element
-
-import java.util.LinkedList
 
 /**
  * Sub-topic structure for the word lists that make up
@@ -10,17 +9,18 @@ import java.util.LinkedList
  *
  * @author Tim Lavers
  */
-internal val CHAPTER = "Chapter"
+val CHAPTER = "Chapter"
+val FAVOURITES = "Favourites"
 
-class ChapterSpec(node: Element) : Spec(node) {
-    private val wordLists = LinkedList<WordListSpec>()
+class ChapterSpec(node: org.w3c.dom.Element) : Spec(node) {
+    private val wordLists = java.util.LinkedList<WordListSpec>()
 
     init {
         val childNodes = node.getElementsByTagName(TAG)
         for (i in 0..childNodes.length - 1) {
             wordLists.add(WordListSpec(childNodes.item(i) as Element))
         }
-        wordLists.add(WordListSpec("Favourites", IndoFlash.FAVOURITES_FILE_NAME))
+        wordLists.add(WordListSpec(FAVOURITES, FAVOURITES_FILE_NAME))
     }
 
     fun wordLists(): List<WordListSpec> {

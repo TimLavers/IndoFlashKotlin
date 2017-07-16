@@ -1,4 +1,4 @@
-package org.grandtestauto.indoflash
+package org.grandtestauto.indoflash.word
 
 /**
  * A word to be learnt, together with its translation.

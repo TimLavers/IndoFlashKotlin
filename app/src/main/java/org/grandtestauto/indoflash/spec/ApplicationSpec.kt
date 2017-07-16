@@ -1,11 +1,6 @@
-package org.grandtestauto.indoflash
+package org.grandtestauto.indoflash.spec
 
-import org.w3c.dom.Document
 import org.w3c.dom.Element
-import org.w3c.dom.Node
-import org.w3c.dom.NodeList
-
-import java.util.LinkedList
 
 /**
  * Topic and sub-topic structure for the word lists that make up
@@ -15,17 +10,17 @@ import java.util.LinkedList
  */
 private val FLASH_CARDS_APP_TAG = "FlashCardsApp"
 private val CHAPTERS_TAG = "Chapters"
-class ApplicationSpec internal constructor(document: Document) {
+class ApplicationSpec internal constructor(document: org.w3c.dom.Document) {
 
-    private val chapterSpecs = LinkedList<ChapterSpec>()
+    private val chapterSpecs = java.util.LinkedList<ChapterSpec>()
 
     init {
-        val appNode = document.getElementsByTagName(FLASH_CARDS_APP_TAG).item(0)
+        val appNode = document.getElementsByTagName(org.grandtestauto.indoflash.spec.FLASH_CARDS_APP_TAG).item(0)
         val children = appNode.childNodes
         for (i in 0..children.length - 1) {
             val child = children.item(i)
-            if (child.nodeName == CHAPTERS_TAG) {
-                val chapterNodes = (child as Element).getElementsByTagName(CHAPTER)
+            if (child.nodeName == org.grandtestauto.indoflash.spec.CHAPTERS_TAG) {
+                val chapterNodes = (child as org.w3c.dom.Element).getElementsByTagName(CHAPTER)
                 for (c in 0..chapterNodes.length - 1) {
                     chapterSpecs.add(ChapterSpec(chapterNodes.item(c) as Element))
                 }
@@ -37,7 +32,7 @@ class ApplicationSpec internal constructor(document: Document) {
         return chapterSpecs
     }
 
-    internal fun chapterForName(name: String): ChapterSpec? {
+    fun chapterForName(name: String): ChapterSpec? {
         for (spec in chapterSpecs) {
             if (spec.title() == name) {
                 return spec

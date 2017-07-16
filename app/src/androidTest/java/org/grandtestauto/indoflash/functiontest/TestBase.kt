@@ -3,7 +3,7 @@ package org.grandtestauto.indoflash.functiontest
 import android.content.Intent
 import android.support.test.rule.ActivityTestRule
 import org.grandtestauto.indoflash.IndoFlash
-import org.grandtestauto.indoflash.WordListDisplay
+import org.grandtestauto.indoflash.activity.WordListDisplay
 import org.grandtestauto.indoflash.testui.WordListDisplayProxy
 import org.junit.After
 import org.junit.Before

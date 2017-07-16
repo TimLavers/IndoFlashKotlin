@@ -3,6 +3,12 @@ package org.grandtestauto.indoflash
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import org.grandtestauto.indoflash.spec.ApplicationSpec
+import org.grandtestauto.indoflash.spec.ChapterSpec
+import org.grandtestauto.indoflash.spec.WordListSpec
+import org.grandtestauto.indoflash.word.Word
+import org.grandtestauto.indoflash.word.WordList
+import org.grandtestauto.indoflash.word.readFromStream
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
@@ -166,7 +172,7 @@ class IndoFlash : Application() {
             val fileNameInt = fileNameIntField.getInt(null)
             val inputStream = resources.openRawResource(fileNameInt)
             val reader = BufferedReader(InputStreamReader(inputStream, "UTF-8"))
-            return WordList.readFromStream(reader)
+            return readFromStream(reader)
         } catch (e: Throwable) {
             Log.e(LOG_ID, "Problem loading file", e)
             return WordList(emptyList<Word>())
@@ -177,7 +183,7 @@ class IndoFlash : Application() {
         try {
             val fin = openFileInput(FAVOURITES_FILE_NAME)
             val reader = InputStreamReader(fin, "UTF-8")
-            return WordList.readFromStream(reader)
+            return readFromStream(reader)
         } catch (e: Exception) {
             Log.d(LOG_ID, "Problem when reading from favourites.", e)
             return WordList(emptyList<Word>())
@@ -187,7 +193,7 @@ class IndoFlash : Application() {
     private fun writeToFavourites(toStore: WordList) {
         try {
             val fout = openFileOutput(FAVOURITES_FILE_NAME, Context.MODE_PRIVATE)
-            toStore.storeIn(OutputStreamWriter(fout!!, "UTF-8"))
+            toStore.store(OutputStreamWriter(fout!!, "UTF-8"))
         } catch (e: Exception) {
             Log.d(LOG_ID, "Could not find file $FAVOURITES_FILE_NAME when writing to favourites.", e)
         }

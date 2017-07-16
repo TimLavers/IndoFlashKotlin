@@ -1,11 +1,9 @@
-package org.grandtestauto.indoflash
+package org.grandtestauto.indoflash.spec
 
 import org.w3c.dom.Element
-import org.w3c.dom.Node
-import org.w3c.dom.NodeList
 
 /**
- * Title and filename. Read from XML.
+ * Title and filename, read from XML.
 
  * @author TimL
  */

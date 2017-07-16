@@ -2,6 +2,7 @@ package org.grandtestauto.indoflash
 
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import org.grandtestauto.indoflash.activity.WordListDisplay
 
 import org.grandtestauto.indoflash.testui.WordListDisplayProxy
 import org.junit.Rule
