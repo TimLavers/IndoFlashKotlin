@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ChapterSelecter"/>
-        <activity android:name=".WordListSelecter"/>
+        <activity android:name="org.grandtestauto.indoflash.activity.ChapterSelecter"/>
+        <activity android:name="org.grandtestauto.indoflash.activity.WordListSelecter"/>
     </application>
 </manifest>
