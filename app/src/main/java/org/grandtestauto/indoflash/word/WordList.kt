@@ -42,9 +42,7 @@ class WordList(wordss: List<Word>) {
         words.remove(word)
     }
 
-    override fun toString(): String {
-        return "WordList" + words
-    }
+    override fun toString(): String = "WordList" + words
 
     fun store(writer: Writer) {
         val bw = BufferedWriter(writer)

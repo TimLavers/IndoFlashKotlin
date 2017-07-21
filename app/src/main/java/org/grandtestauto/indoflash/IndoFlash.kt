@@ -48,7 +48,7 @@ class IndoFlash : Application() {
     private fun setInitialChapterAndWordList() {
         val storedChapter = getSetting(CHAPTER_PREFERENCES_KEY)
         currentChapter = applicationSpec.chapterForName(storedChapter)
-        if (currentChapter == null) currentChapter = applicationSpec.chapterSpecs()[0]
+        if (currentChapter == null) currentChapter = applicationSpec.chapterSpecs[0]
 
         val storedWordList = getSetting(WORD_LIST_PREFERENCES_KEY)
         wordListSpec = currentChapter!!.forName(storedWordList)
@@ -139,7 +139,7 @@ class IndoFlash : Application() {
     }
 
     fun chapterSpecs(): List<ChapterSpec> {
-        return applicationSpec.chapterSpecs()
+        return applicationSpec.chapterSpecs
     }
 
     fun shuffle(): Boolean {

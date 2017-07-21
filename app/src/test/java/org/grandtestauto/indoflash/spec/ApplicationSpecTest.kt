@@ -11,9 +11,9 @@ class ApplicationSpecTest {
     @Test
     fun constructFromNode() {
         val spec = ApplicationSpec(getDocument(XML))
-        Assert.assertEquals(2, spec.chapterSpecs().size.toLong())
-        Assert.assertEquals("Lessons 1 - 10", spec.chapterSpecs()[0].title())
-        Assert.assertEquals("Lessons 11 - 20", spec.chapterSpecs()[1].title())
+        Assert.assertEquals(2, spec.chapterSpecs.size.toLong())
+        Assert.assertEquals("Lessons 1 - 10", spec.chapterSpecs[0].title())
+        Assert.assertEquals("Lessons 11 - 20", spec.chapterSpecs[1].title())
     }
 
     @Test

@@ -26,7 +26,7 @@ open class TestBase {
     @After
     fun cleanup() {
         val application = activityRule.activity.application as IndoFlash
-        val chapter1Spec = application.applicationSpec().chapterSpecs()[0]
+        val chapter1Spec = application.applicationSpec().chapterSpecs[0]
         application.setCurrentChapter(chapter1Spec)
         application.setWordList(chapter1Spec.wordLists()[0])
 

@@ -24,12 +24,12 @@ class WordListDisplay : Activity() {
     lateinit private var definitionView: TextView
     lateinit private var nextButton: Button
     lateinit private var indonesianFirstButton: ImageButton
-    lateinit  private var addRemoveFavouriteButton: ImageButton
+    lateinit private var addRemoveFavouriteButton: ImageButton
     lateinit private var shuffleButton: ImageButton
+    lateinit private var wordList: WordList
     private var showDefinition: Boolean = false
     private var finished = false
     private var currentPosition = 0
-    private var wordList: WordList? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +62,7 @@ class WordListDisplay : Activity() {
         wordList = application.wordList()
         if (application.shuffle()) {
             val toShuffle = LinkedList<Word>()
-            toShuffle.addAll(wordList!!.words())
+            toShuffle.addAll(wordList.words())
             Collections.shuffle(toShuffle)
             wordList = WordList(toShuffle)
         }
@@ -101,7 +101,7 @@ class WordListDisplay : Activity() {
     private fun showFeedback() {
         val builder = AlertDialog.Builder(this)
         // Add the buttons
-        builder.setPositiveButton(R.string.ok) { dialog, id ->
+        builder.setPositiveButton(R.string.ok) { _, _ ->
             // User clicked OK button
         }
         builder.setTitle(applicationContext.resources.getString(R.string.info))
@@ -114,7 +114,7 @@ class WordListDisplay : Activity() {
     private fun showHelp() {
         val builder = AlertDialog.Builder(this)
         // Add the buttons
-        builder.setPositiveButton(R.string.ok) { dialog, id ->
+        builder.setPositiveButton(R.string.ok) { _, _ ->
             // User clicked OK button
         }
         builder.setTitle(applicationContext.resources.getString(R.string.help))
@@ -176,7 +176,7 @@ class WordListDisplay : Activity() {
     }
 
     private fun showFirstWord() {
-        if (application.showingFavourites() && wordList!!.words().isEmpty()) {
+        if (application.showingFavourites() && wordList.words().isEmpty()) {
             showForEmptyFavourites()
         } else {
             wordView.text = getWord(0).word
@@ -217,7 +217,7 @@ class WordListDisplay : Activity() {
                 showDefinition = false
             }
             //The user may now be at the end of the list.
-            if (currentPosition == wordList!!.words().size - 1) {
+            if (currentPosition == wordList.words().size - 1) {
                 finished = true
                 if (application.storedFavourites().words().isEmpty()) {
                     showForEmptyFavourites()
@@ -233,7 +233,7 @@ class WordListDisplay : Activity() {
     }
 
     private fun getWord(index: Int): Word {
-        val word = wordList!!.words()[index]
+        val word = wordList.words()[index]
         if (application.showIndonesianFirst()) return word
         return Word(word.definition, word.word)
     }
@@ -252,7 +252,7 @@ class WordListDisplay : Activity() {
             definitionView.text = getWord(currentPosition).definition
             nextButton.setText(R.string.next)
             showDefinition = false
-            if (currentPosition == wordList!!.words().size - 1) {
+            if (currentPosition == wordList.words().size - 1) {
                 finished = true
                 nextButton.setText(R.string.repeat)
             }
