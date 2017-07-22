@@ -7,7 +7,7 @@ import org.hamcrest.Description
 import android.support.test.espresso.Espresso.onData
 import android.support.test.espresso.action.ViewActions.click
 
-class WordListSelecterProxy internal constructor() : ListViewProxy(R.id.lists_list) {
+class WordListSelecterProxy internal constructor() : ListViewProxy(R.id.listsList) {
 
     fun selectFavourites() {
         onData(ContainsMatcher("Favourites")).perform(click())
@@ -19,7 +19,7 @@ class WordListSelecterProxy internal constructor() : ListViewProxy(R.id.lists_li
     }
 
     fun activateChapterListButton(): ChapterListSelecterProxy {
-        ButtonProxy(R.id.show_chapters_button).activate()
+        ButtonProxy(R.id.showChaptersButton).activate()
         return ChapterListSelecterProxy()
     }
 }

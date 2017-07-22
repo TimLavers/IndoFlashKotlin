@@ -7,7 +7,7 @@
 
 
     <ListView
-            android:id="@+id/lists_list"
+            android:id="@+id/listsList"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:background="#ffffff"
@@ -18,7 +18,7 @@
                   android:layout_width="fill_parent"
                   android:layout_weight="5"
                   android:layout_height="match_parent">
-        <ImageButton android:id="@+id/show_chapters_button"
+        <ImageButton android:id="@+id/showChaptersButton"
                 android:contentDescription="@string/show_chapter_lists"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
