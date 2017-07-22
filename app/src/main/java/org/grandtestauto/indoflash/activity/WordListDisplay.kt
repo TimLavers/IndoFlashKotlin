@@ -9,11 +9,12 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
+import org.jetbrains.anko.toast
 import org.grandtestauto.indoflash.IndoFlash
 import org.grandtestauto.indoflash.R
 import org.grandtestauto.indoflash.word.Word
 import org.grandtestauto.indoflash.word.WordList
+import org.jetbrains.anko.intentFor
 import java.util.*
 
 class WordListDisplay : Activity() {
@@ -48,8 +49,7 @@ class WordListDisplay : Activity() {
         val showListsButton = findViewById(R.id.show_word_lists_button) as ImageButton
         showListsButton.setImageResource(R.drawable.ic_lists)
         showListsButton.setOnClickListener {
-            val intent = Intent(this@WordListDisplay, WordListSelecter::class.java)
-            startActivity(intent)
+            startActivity(intentFor<WordListSelecter>())
         }
 
         addRemoveFavouriteButton = findViewById(R.id.add_to_favourites_button) as ImageButton
@@ -142,7 +142,7 @@ class WordListDisplay : Activity() {
         val description = indonesianFirstButton.context.resources.getText(resourceId)
         indonesianFirstButton.contentDescription = description
         if (showToast)
-            Toast.makeText(applicationContext, description, Toast.LENGTH_SHORT).show()
+            toast(description)
     }
 
     private fun toggleShuffle() {
@@ -150,8 +150,9 @@ class WordListDisplay : Activity() {
         loadWordList()
         showFirstWord()
         setupShuffleButton()
+        //todo simplify this if
         val msgId = if (application.shuffle()) R.string.shuffle_on_toast else R.string.shuffle_off_toast
-        Toast.makeText(applicationContext, msgId, Toast.LENGTH_SHORT).show()
+        toast(msgId)
     }
 
     private fun setupShuffleButton() {
@@ -211,7 +212,7 @@ class WordListDisplay : Activity() {
     private fun addRemoveFavourite() {
         application.addRemoveFavourite(getWord(currentPosition))
         if (application.showingFavourites()) {
-            Toast.makeText(applicationContext, R.string.removed_from_favourites_toast, Toast.LENGTH_SHORT).show()
+            toast(R.string.removed_from_favourites_toast)
             if (showDefinition) {
                 //Removing a word is like activating Show but we don't want to see the definition of the word just removed.
                 showDefinition = false
@@ -228,7 +229,7 @@ class WordListDisplay : Activity() {
                 next()
             }
         } else {
-            Toast.makeText(applicationContext, R.string.added_to_favourites_toast, Toast.LENGTH_SHORT).show()
+            toast(R.string.added_to_favourites_toast)
         }
     }
 
