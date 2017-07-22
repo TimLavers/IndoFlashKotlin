@@ -1,5 +1,6 @@
 package org.grandtestauto.indoflash.activity
 
+import android.app.Activity
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -13,14 +14,13 @@ import org.jetbrains.anko.intentFor
  *
  * @author Tim Lavers
  */
-class ChapterSelecter : android.app.Activity() {
-    lateinit private var handler: IndoFlash
+class ChapterSelecter : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.chapter_selecter)
         val chapterList = findViewById(R.id.chapters_list) as ListView
-        handler = application as IndoFlash
+        val handler = application as IndoFlash
         val chapterSpecs = handler.chapterSpecs()
         val spinnerModel = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, chapterSpecs)
         chapterList.adapter = spinnerModel
