@@ -8,7 +8,7 @@
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content">
 
-        <TextView android:id="@+id/word_list_title_view"
+        <TextView android:id="@+id/wordListTitleView"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
                   android:gravity="center_horizontal"
@@ -21,7 +21,7 @@
                   android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/word_view"
+            android:id="@+id/wordView"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -30,7 +30,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/definition_view"
+            android:id="@+id/definitionView"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -41,14 +41,14 @@
         <LinearLayout android:orientation="horizontal"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content">
-            <ImageButton android:id="@+id/indonesian_first_button"
+            <ImageButton android:id="@+id/indonesianFirstButton"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:background="@android:color/transparent"
                          android:padding="15dp"
                          android:layout_weight="1"
                          android:contentDescription="@string/indonesian_first"/>
-            <ImageButton android:id="@+id/add_to_favourites_button"
+            <ImageButton android:id="@+id/addOrRemoveFavouriteButton"
                          android:contentDescription="@string/add_to_favourites"
                          android:layout_width="wrap_content"
                          android:hapticFeedbackEnabled="true"
@@ -56,7 +56,7 @@
                          android:padding="15dp"
                          android:layout_weight="1"
                          android:layout_height="wrap_content"/>
-            <ImageButton android:id="@+id/shuffle_button"
+            <ImageButton android:id="@+id/shuffleButton"
                          android:contentDescription="@string/shuffle"
                          android:layout_width="wrap_content"
                          android:padding="15dp"
@@ -74,7 +74,7 @@
         <LinearLayout android:orientation="horizontal"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content">
-            <Button android:id="@+id/next_button"
+            <Button android:id="@+id/nextButton"
                          android:layout_width="fill_parent"
                          android:textSize="26dp"
                          android:padding="25dp"

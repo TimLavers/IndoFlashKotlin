@@ -15,10 +15,10 @@ import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
 
 class WordListDisplayProxy {
-    private val currentWordProxy = TextFieldProxy(R.id.word_view)
-    private val translatedWordProxy = TextFieldProxy(R.id.definition_view)
-    private val nextButtonProxy = ButtonProxy(R.id.next_button)
-    private val favouritesProxy = ButtonProxy(R.id.add_to_favourites_button)
+    private val currentWordProxy = TextFieldProxy(R.id.wordView)
+    private val translatedWordProxy = TextFieldProxy(R.id.definitionView)
+    private val nextButtonProxy = ButtonProxy(R.id.nextButton)
+    private val favouritesProxy = ButtonProxy(R.id.addOrRemoveFavouriteButton)
     private val wordListsButtonProxy = ButtonProxy(R.id.show_word_lists_button)
 
     fun checkCurrentWordIs(expected: String) {
@@ -26,7 +26,7 @@ class WordListDisplayProxy {
     }
 
     fun checkShowsEmptyFavouritesMessage() {
-        onView(withId(R.id.word_view)).check(matches(withText(R.string.favourites_is_empty)))
+        onView(withId(R.id.wordView)).check(matches(withText(R.string.favourites_is_empty)))
     }
 
     fun checkWordViewIsShowing() {
@@ -67,7 +67,7 @@ class WordListDisplayProxy {
     }
 
     fun checkTitle(expected: String) {
-        ViewProxy(R.id.word_list_title_view).checkText(expected)
+        ViewProxy(R.id.wordListTitleView).checkText(expected)
     }
 
     fun activateWordListSelectorButton(): WordListSelecterProxy {
@@ -84,15 +84,15 @@ class WordListDisplayProxy {
     }
 
     fun addOrRemoveFavouriteButton(): ButtonProxy {
-        return ButtonProxy(R.id.add_to_favourites_button)
+        return ButtonProxy(R.id.addOrRemoveFavouriteButton)
     }
 
     fun toggleIndonesianButton(): ButtonProxy {
-        return ButtonProxy(R.id.indonesian_first_button)
+        return ButtonProxy(R.id.indonesianFirstButton)
     }
 
     fun shuffleUnshuffleButton(): ButtonProxy {
-        return ButtonProxy(R.id.shuffle_button)
+        return ButtonProxy(R.id.shuffleButton)
     }
 
 
@@ -101,7 +101,7 @@ class WordListDisplayProxy {
      */
     fun currentWord(): CharSequence? {
         val result = arrayOfNulls<CharSequence>(1)
-        onView(withId(R.id.word_view)).perform(object : ViewAction {
+        onView(withId(R.id.wordView)).perform(object : ViewAction {
             override fun getConstraints(): Matcher<View> {
                 return isAssignableFrom(TextView::class.java)
             }

@@ -2,13 +2,10 @@ package org.grandtestauto.indoflash.activity
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.ImageButton
-import android.widget.TextView
 import org.jetbrains.anko.toast
 import org.grandtestauto.indoflash.IndoFlash
 import org.grandtestauto.indoflash.R
@@ -17,16 +14,11 @@ import org.grandtestauto.indoflash.word.WordList
 import org.jetbrains.anko.intentFor
 import java.util.*
 
+import kotlinx.android.synthetic.main.activity_word_list.*
+
 class WordListDisplay : Activity() {
 
     lateinit private var application: IndoFlash
-    lateinit private var chapterTitle: TextView
-    lateinit private var wordView: TextView
-    lateinit private var definitionView: TextView
-    lateinit private var nextButton: Button
-    lateinit private var indonesianFirstButton: ImageButton
-    lateinit private var addRemoveFavouriteButton: ImageButton
-    lateinit private var shuffleButton: ImageButton
     lateinit private var wordList: WordList
     private var showDefinition: Boolean = false
     private var finished = false
@@ -35,15 +27,9 @@ class WordListDisplay : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word_list)
-        chapterTitle = findViewById(R.id.word_list_title_view) as TextView
-        wordView = findViewById(R.id.word_view) as TextView
-        definitionView = findViewById(R.id.definition_view) as TextView
-        indonesianFirstButton = findViewById(R.id.indonesian_first_button) as ImageButton
         indonesianFirstButton.setOnClickListener { toggleIndonesianFirst() }
-        nextButton = findViewById(R.id.next_button) as Button
         nextButton.setText(R.string.show)
         nextButton.setOnClickListener { next() }
-        shuffleButton = findViewById(R.id.shuffle_button) as ImageButton
         shuffleButton.setOnClickListener { toggleShuffle() }
 
         val showListsButton = findViewById(R.id.show_word_lists_button) as ImageButton
@@ -52,8 +38,7 @@ class WordListDisplay : Activity() {
             startActivity(intentFor<WordListSelecter>())
         }
 
-        addRemoveFavouriteButton = findViewById(R.id.add_to_favourites_button) as ImageButton
-        addRemoveFavouriteButton.setOnClickListener { addRemoveFavourite() }
+        addOrRemoveFavouriteButton.setOnClickListener { addRemoveFavourite() }
         application = getApplication() as IndoFlash
         doSetup()
     }
@@ -168,7 +153,7 @@ class WordListDisplay : Activity() {
     }
 
     private fun doSetup() {
-        chapterTitle.text = application.currentWordList().title()
+        wordListTitleView.text = application.currentWordList().title()
         setupIndonesianFirstButton(false)
         setupShuffleButton()
         setupFavouritesButton()
@@ -185,7 +170,7 @@ class WordListDisplay : Activity() {
             showDefinition = true
             currentPosition = 0
             nextButton.isClickable = true
-            addRemoveFavouriteButton.isClickable = true
+            addOrRemoveFavouriteButton.isClickable = true
         }
     }
 
@@ -194,19 +179,19 @@ class WordListDisplay : Activity() {
         wordView.setText(R.string.favourites_is_empty)
         nextButton.text = ""
         nextButton.isClickable = false
-        addRemoveFavouriteButton.isClickable = false
+        addOrRemoveFavouriteButton.isClickable = false
     }
 
     private fun setupFavouritesButton() {
         var resourceId = R.string.add_to_favourites
         if (application.showingFavourites()) {
             resourceId = R.string.remove_from_favourites
-            addRemoveFavouriteButton.setImageResource(R.drawable.ic_remove_from_favourites)
+            addOrRemoveFavouriteButton.setImageResource(R.drawable.ic_remove_from_favourites)
         } else {
-            addRemoveFavouriteButton.setImageResource(R.drawable.ic_add_to_favourites)
+            addOrRemoveFavouriteButton.setImageResource(R.drawable.ic_add_to_favourites)
         }
-        val description = addRemoveFavouriteButton.context.resources.getText(resourceId)
-        addRemoveFavouriteButton.contentDescription = description
+        val description = addOrRemoveFavouriteButton.context.resources.getText(resourceId)
+        addOrRemoveFavouriteButton.contentDescription = description
     }
 
     private fun addRemoveFavourite() {
