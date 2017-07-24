@@ -12,14 +12,14 @@ class ApplicationSpecTest {
     fun constructFromNode() {
         val spec = ApplicationSpec(getDocument(XML))
         Assert.assertEquals(2, spec.chapterSpecs.size.toLong())
-        Assert.assertEquals("Lessons 1 - 10", spec.chapterSpecs[0].title())
-        Assert.assertEquals("Lessons 11 - 20", spec.chapterSpecs[1].title())
+        Assert.assertEquals("Lessons 1 - 10", spec.chapterSpecs[0].title)
+        Assert.assertEquals("Lessons 11 - 20", spec.chapterSpecs[1].title)
     }
 
     @Test
     fun chapterForName() {
         val spec = ApplicationSpec(getDocument(XML))
-        Assert.assertEquals("Lessons 1 - 10", spec.chapterForName("Lessons 1 - 10")!!.title())
+        Assert.assertEquals("Lessons 1 - 10", spec.chapterForName("Lessons 1 - 10")!!.title)
         Assert.assertNull(spec.chapterForName("not there"))
     }
 

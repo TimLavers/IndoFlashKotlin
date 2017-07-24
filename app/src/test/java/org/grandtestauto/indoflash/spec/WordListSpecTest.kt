@@ -27,14 +27,14 @@ class WordListSpecTest {
     @Test
     fun testTitle() {
         val title = "The title"
-        Assert.assertEquals(title, wordListSpec(title, "The file").title())
+        Assert.assertEquals(title, wordListSpec(title, "The file").title)
     }
 
     @Test
     fun testFileName() {
         val title = "The title"
         val fileName = "The file"
-        Assert.assertEquals(fileName, wordListSpec(title, fileName).fileName())
+        Assert.assertEquals(fileName, wordListSpec(title, fileName).fileName)
     }
 
     @Test
@@ -48,7 +48,7 @@ class WordListSpecTest {
         val xml = "<WordList><Title>Lesson 1</Title><File>lesson1</File></WordList>"
         val appNode = parseNode(xml, TAG)
         val list = WordListSpec(appNode as Element)
-        Assert.assertEquals("Lesson 1", list.title())
-        Assert.assertEquals("lesson1", list.fileName())
+        Assert.assertEquals("Lesson 1", list.title)
+        Assert.assertEquals("lesson1", list.fileName)
     }
 }

@@ -153,7 +153,7 @@ class WordListDisplay : Activity() {
     }
 
     private fun doSetup() {
-        wordListTitleView.text = application.currentWordList().title()
+        wordListTitleView.text = application.currentWordList().title
         setupIndonesianFirstButton(false)
         setupShuffleButton()
         setupFavouritesButton()

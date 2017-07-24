@@ -12,7 +12,7 @@ class SpecTest {
 
     @org.junit.Test
     fun testTitle() {
-        org.junit.Assert.assertEquals("The title", spec("The title").title())
+        org.junit.Assert.assertEquals("The title", spec("The title").title)
     }
 
     @Test
@@ -20,6 +20,6 @@ class SpecTest {
         val xml = "<WordList><Title>Lesson 1</Title><File>lesson1</File></WordList>"
         val appNode = parseNode(xml, TAG)
         val list = Spec(appNode as Element)
-        Assert.assertEquals("Lesson 1", list.title())
+        Assert.assertEquals("Lesson 1", list.title)
     }
 }

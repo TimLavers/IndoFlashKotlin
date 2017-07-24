@@ -114,7 +114,7 @@ class IndoFlash : Application() {
 
     fun setWordList(wordListSpec: WordListSpec) {
         this.wordListSpec = wordListSpec
-        val fileName = wordListSpec.fileName()
+        val fileName = wordListSpec.fileName
         if (fileName.equals(FAVOURITES_FILE_NAME, ignoreCase = true)) {
             wordList = readFromFavourites()
             showingFavourites = true
@@ -122,12 +122,12 @@ class IndoFlash : Application() {
             wordList = readWordList(fileName)
             showingFavourites = false
         }
-        storeSetting(WORD_LIST_PREFERENCES_KEY, wordListSpec.title())
+        storeSetting(WORD_LIST_PREFERENCES_KEY, wordListSpec.title)
     }
 
     fun setCurrentChapter(chapterSpec: ChapterSpec) {
         this.currentChapter = chapterSpec
-        storeSetting(CHAPTER_PREFERENCES_KEY, chapterSpec.title())
+        storeSetting(CHAPTER_PREFERENCES_KEY, chapterSpec.title)
     }
 
     fun currentChapter(): ChapterSpec {
