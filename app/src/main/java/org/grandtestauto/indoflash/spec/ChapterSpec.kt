@@ -2,7 +2,6 @@ package org.grandtestauto.indoflash.spec
 
 import org.grandtestauto.indoflash.FAVOURITES_FILE_NAME
 import org.w3c.dom.Element
-import java.util.*
 
 /**
  * Sub-topic structure for the word lists that make up
@@ -17,7 +16,7 @@ class ChapterSpec(node: Element) : Spec(node) {
     private val wordLists = mutableListOf<WordListSpec>()
 
     init {
-        val childNodes = node.getElementsByTagName(TAG)
+        val childNodes = node.getElementsByTagName(WORD_LIST)
         childNodes.iterable().forEach { wordLists.add(WordListSpec(it as Element)) }
         wordLists.add(WordListSpec(FAVOURITES, FAVOURITES_FILE_NAME))
     }

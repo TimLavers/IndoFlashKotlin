@@ -1,6 +1,9 @@
 package org.grandtestauto.indoflash.spec
 
-val TAG = "WordList"
+import org.w3c.dom.Element
+
+val WORD_LIST = "WordList"
+
 /**
  * Title and filename for a word list. Read from XML.
 
@@ -15,7 +18,7 @@ class WordListSpec : Spec {
         this.fileName = fileName
     }
 
-    internal constructor(node: org.w3c.dom.Element) : super(node) {
+    internal constructor(node: Element) : super(node) {
         val childNodes = node.getElementsByTagName(FILE_TAG)
         fileName = childNodes.item(0).textContent.trim()
     }

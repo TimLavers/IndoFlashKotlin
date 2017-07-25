@@ -46,7 +46,7 @@ class WordListSpecTest {
     @Test
     fun constructFromNode() {
         val xml = "<WordList><Title>Lesson 1</Title><File>lesson1</File></WordList>"
-        val appNode = parseNode(xml, TAG)
+        val appNode = parseNode(xml, WORD_LIST)
         val list = WordListSpec(appNode as Element)
         Assert.assertEquals("Lesson 1", list.title)
         Assert.assertEquals("lesson1", list.fileName)

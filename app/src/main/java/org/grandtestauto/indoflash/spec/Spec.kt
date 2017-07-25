@@ -11,7 +11,7 @@ import org.w3c.dom.NodeList
  */
 private val TITLE_TAG = "Title"
 
-fun Node.children() : Iterable<Node> {
+fun Node.children(): Iterable<Node> {
     return this.childNodes.iterable()
 }
 
@@ -31,7 +31,7 @@ open class Spec {
     }
 
     constructor(node: Element) {
-        title = node.childNodes.iterable().find {it.nodeName == TITLE_TAG  }?.textContent?.trim() ?: ""
+        title = node.children().find { it.nodeName == TITLE_TAG }?.textContent?.trim() ?: ""
     }
 
     override fun toString(): String {
