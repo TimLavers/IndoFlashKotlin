@@ -30,9 +30,9 @@ const val WORD_LIST_PREFERENCES_KEY = "WordList"
  */
 class IndoFlash : Application() {
 
-    private var wordListSpec: WordListSpec? = null
+    lateinit private var wordListSpec: WordListSpec
     lateinit private var wordList: WordList
-    private var currentChapter: ChapterSpec? = null
+    lateinit private var currentChapter: ChapterSpec
     lateinit private var applicationSpec: ApplicationSpec
     private var showIndonesianFirst = false
     private var showingFavourites = false
@@ -47,24 +47,18 @@ class IndoFlash : Application() {
 
     private fun setInitialChapterAndWordList() {
         val storedChapter = getSetting(CHAPTER_PREFERENCES_KEY)
-        currentChapter = applicationSpec.chapterForName(storedChapter)
-        if (currentChapter == null) currentChapter = applicationSpec.chapterSpecs[0]
+        currentChapter = applicationSpec.chapterForName(storedChapter) ?: applicationSpec.chapterSpecs[0]
 
         val storedWordList = getSetting(WORD_LIST_PREFERENCES_KEY)
-        wordListSpec = currentChapter!!.forName(storedWordList)
-        if (wordListSpec == null) {
-            wordListSpec = currentChapter!!.wordLists()[0]
-        }
-        setWordList(wordListSpec!!)
+        wordListSpec = currentChapter.forName(storedWordList) ?: currentChapter.wordLists()[0]
+        setWordList(wordListSpec)
     }
 
     override fun onTerminate() {
         super.onTerminate()
     }
 
-    fun applicationSpec(): ApplicationSpec {
-        return applicationSpec
-    }
+    fun applicationSpec(): ApplicationSpec = applicationSpec
 
     fun addRemoveFavourite(word: Word) {
         //If translation is showing first, the word passed in here is the reverse of its stored version in the data files.
@@ -83,13 +77,9 @@ class IndoFlash : Application() {
         writeToFavourites(WordList(emptyList<Word>()))
     }
 
-    internal fun storedFavourites(): WordList {
-        return readFromFavourites()
-    }
+    internal fun storedFavourites(): WordList = readFromFavourites()
 
-    internal fun wordList(): WordList {
-        return wordList
-    }
+    internal fun wordList(): WordList = wordList
 
     fun toggleShowIndonesianFirst() {
         showIndonesianFirst = !showIndonesianFirst
@@ -104,13 +94,9 @@ class IndoFlash : Application() {
         getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE).edit().putString(key, value).apply()
     }
 
-    private fun getSetting(key: String): String {
-        return getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE).getString(key, "")
-    }
+    private fun getSetting(key: String): String = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE).getString(key, "")
 
-    fun showIndonesianFirst(): Boolean {
-        return showIndonesianFirst
-    }
+    fun showIndonesianFirst(): Boolean = showIndonesianFirst
 
     fun setWordList(wordListSpec: WordListSpec) {
         this.wordListSpec = wordListSpec
@@ -130,36 +116,26 @@ class IndoFlash : Application() {
         storeSetting(CHAPTER_PREFERENCES_KEY, chapterSpec.title)
     }
 
-    fun currentChapter(): ChapterSpec {
-        return currentChapter!!
-    }
+    fun currentChapter(): ChapterSpec = currentChapter
 
-    fun currentWordList(): WordListSpec {
-        return wordListSpec!!
-    }
+    fun currentWordList(): WordListSpec = wordListSpec
 
-    fun chapterSpecs(): List<ChapterSpec> {
-        return applicationSpec.chapterSpecs
-    }
+    fun chapterSpecs(): List<ChapterSpec> = applicationSpec.chapterSpecs
 
-    fun shuffle(): Boolean {
-        return shuffle
-    }
+    fun shuffle(): Boolean =  shuffle
 
     fun toggleShuffle() {
         shuffle = !shuffle
     }
 
-    fun showingFavourites(): Boolean {
-        return showingFavourites
-    }
+    fun showingFavourites(): Boolean = showingFavourites
 
     private fun parseSetupFileToApplicationSpec() {
         val inputStream = resources.openRawResource(R.raw.setup)
         try {
             val builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-            val document = builder!!.parse(inputStream)
-            applicationSpec = ApplicationSpec(document!!)
+            val document = builder.parse(inputStream)
+            applicationSpec = ApplicationSpec(document)
         } catch (e: Exception) {
             handleError("Error reading setup file", e)
         }
