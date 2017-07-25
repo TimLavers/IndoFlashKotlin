@@ -4,17 +4,16 @@ import java.io.BufferedReader
 import java.io.BufferedWriter
 import java.io.Reader
 import java.io.Writer
-import java.util.*
 
 fun readFromStream(reader: Reader): WordList {
-    val words = LinkedList<Word>()
+    val words = mutableListOf<Word>()
     val bufferedReader = BufferedReader(reader)
     var nextLine: String? = bufferedReader.readLine()
     while (nextLine != null) {
         if (nextLine.contains("=")) {
-            val pair = nextLine.split("=".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
+            val pair = nextLine.split("=")
             if (pair.size != 2) continue
-            words.add(Word(pair[0].trim({ it <= ' ' }), pair[1].trim({ it <= ' ' })))
+            words.add(Word(pair[0].trim(), pair[1].trim()))
         }
         nextLine = bufferedReader.readLine()
     }
@@ -26,12 +25,10 @@ fun readFromStream(reader: Reader): WordList {
  *
  * @author Tim Lavers
  */
-class WordList(wordss: List<Word>) {
-    private val words = wordss.toMutableList()
+class WordList(words: List<Word>) {
+    private val words = words.toMutableList()
 
-    fun words(): List<Word> {
-        return Collections.unmodifiableList(words)
-    }
+    fun words(): List<Word> = words.toList()
 
     fun add(word: Word) {
         if (words.contains(word)) return
@@ -46,12 +43,7 @@ class WordList(wordss: List<Word>) {
 
     fun store(writer: Writer) {
         val bw = BufferedWriter(writer)
-        for (word in words) {
-            bw.append(word.word)
-            bw.append("=")
-            bw.append(word.definition)
-            bw.newLine()
-        }
+        words.forEach { bw.append("${it.word}=${it.definition}\n") }
         bw.close()
     }
 }
