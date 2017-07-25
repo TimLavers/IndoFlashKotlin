@@ -63,7 +63,7 @@
                          android:layout_weight="1"
                          android:background="@android:color/transparent"
                          android:layout_height="wrap_content"/>
-            <ImageButton android:id="@+id/show_word_lists_button"
+            <ImageButton android:id="@+id/showWordListsButton"
                          android:background="@android:color/transparent"
                          android:padding="15dp"
                          android:layout_weight="1"

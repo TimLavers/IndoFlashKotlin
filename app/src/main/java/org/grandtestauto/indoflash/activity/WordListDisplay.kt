@@ -1,20 +1,19 @@
 package org.grandtestauto.indoflash.activity
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ImageButton
-import org.jetbrains.anko.toast
+import kotlinx.android.synthetic.main.activity_word_list.*
 import org.grandtestauto.indoflash.IndoFlash
 import org.grandtestauto.indoflash.R
 import org.grandtestauto.indoflash.word.Word
 import org.grandtestauto.indoflash.word.WordList
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.toast
+import org.jetbrains.anko.yesButton
 import java.util.*
-
-import kotlinx.android.synthetic.main.activity_word_list.*
 
 class WordListDisplay : Activity() {
 
@@ -32,9 +31,8 @@ class WordListDisplay : Activity() {
         nextButton.setOnClickListener { next() }
         shuffleButton.setOnClickListener { toggleShuffle() }
 
-        val showListsButton = findViewById(R.id.show_word_lists_button) as ImageButton
-        showListsButton.setImageResource(R.drawable.ic_lists)
-        showListsButton.setOnClickListener {
+        showWordListsButton.setImageResource(R.drawable.ic_lists)
+        showWordListsButton.setOnClickListener {
             startActivity(intentFor<WordListSelecter>())
         }
 
@@ -63,8 +61,7 @@ class WordListDisplay : Activity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.actions, menu)
+        menuInflater.inflate(R.menu.actions, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -72,41 +69,15 @@ class WordListDisplay : Activity() {
         // Handle presses on the action bar items
         when (item.itemId) {
             R.id.action_info -> {
-                showFeedback()
+                alert(R.string.acknowledgements, R.string.info) {yesButton { }}.show()
                 return true
             }
             R.id.action_help -> {
-                showHelp()
+                alert(R.string.help_text, R.string.help) { yesButton { } }.show()
                 return true
             }
             else -> return super.onOptionsItemSelected(item)
         }
-    }
-
-    private fun showFeedback() {
-        val builder = AlertDialog.Builder(this)
-        // Add the buttons
-        builder.setPositiveButton(R.string.ok) { _, _ ->
-            // User clicked OK button
-        }
-        builder.setTitle(applicationContext.resources.getString(R.string.info))
-        builder.setMessage(applicationContext.resources.getString(R.string.acknowledgements))
-        // Create the AlertDialog
-        val dialog = builder.create()
-        dialog.show()
-    }
-
-    private fun showHelp() {
-        val builder = AlertDialog.Builder(this)
-        // Add the buttons
-        builder.setPositiveButton(R.string.ok) { _, _ ->
-            // User clicked OK button
-        }
-        builder.setTitle(applicationContext.resources.getString(R.string.help))
-        builder.setMessage(applicationContext.resources.getString(R.string.help_text))
-        // Create the AlertDialog
-        val dialog = builder.create()
-        dialog.show()
     }
 
     private fun toggleIndonesianFirst() {

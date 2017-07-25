@@ -19,7 +19,7 @@ class WordListDisplayProxy {
     private val translatedWordProxy = TextFieldProxy(R.id.definitionView)
     private val nextButtonProxy = ButtonProxy(R.id.nextButton)
     private val favouritesProxy = ButtonProxy(R.id.addOrRemoveFavouriteButton)
-    private val wordListsButtonProxy = ButtonProxy(R.id.show_word_lists_button)
+    private val wordListsButtonProxy = ButtonProxy(R.id.showWordListsButton)
 
     fun checkCurrentWordIs(expected: String) {
         currentWordProxy.checkText(expected)
