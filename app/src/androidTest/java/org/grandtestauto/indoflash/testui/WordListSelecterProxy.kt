@@ -1,13 +1,13 @@
 package org.grandtestauto.indoflash.testui
 
-import org.grandtestauto.indoflash.R
+import android.support.test.espresso.Espresso.onData
+import android.support.test.espresso.action.ViewActions.click
+import org.grandtestauto.indoflash.activity.CHAPTERS_BUTTON_ID
+import org.grandtestauto.indoflash.activity.CHAPTERS_LIST_ID
 import org.hamcrest.BaseMatcher
 import org.hamcrest.Description
 
-import android.support.test.espresso.Espresso.onData
-import android.support.test.espresso.action.ViewActions.click
-
-class WordListSelecterProxy internal constructor() : ListViewProxy(R.id.listsList) {
+class WordListSelecterProxy internal constructor() : ListViewProxy(CHAPTERS_LIST_ID) {
 
     fun selectFavourites() {
         onData(ContainsMatcher("Favourites")).perform(click())
@@ -19,7 +19,7 @@ class WordListSelecterProxy internal constructor() : ListViewProxy(R.id.listsLis
     }
 
     fun activateChapterListButton(): ChapterListSelecterProxy {
-        ButtonProxy(R.id.showChaptersButton).activate()
+        ButtonProxy(CHAPTERS_BUTTON_ID).activate()
         return ChapterListSelecterProxy()
     }
 }
